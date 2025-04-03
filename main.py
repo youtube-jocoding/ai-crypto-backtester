@@ -76,7 +76,10 @@ def main():
     # Create results directory if it doesn't exist
     os.makedirs("results", exist_ok=True)
     # Generate filename based on symbol and date
-    filename = f"results/backtest_{model}_{ai_cfg['reasoning_effort']}_{symbol.replace('/', '_')}_{start_date}_to_{end_date}.html"
+    if model.startswith("o"):
+        filename = f"results/backtest_{model}_{ai_cfg['reasoning_effort']}_{symbol.replace('/', '_')}_{start_date}_to_{end_date}.html"
+    else:
+        filename = f"results/backtest_{model}_{symbol.replace('/', '_')}_{start_date}_to_{end_date}.html"
     # Plot results and save to HTML file
     plot_results(backtest, save_path=filename, model=model)
     print(f"Report saved to: {filename}")
